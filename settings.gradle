@@ -13,7 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "dogApi"
-include ':common'
 include ':app'
-// load all features module
-file('./feature/').eachDir { sub -> include ':feature:' + sub.name }

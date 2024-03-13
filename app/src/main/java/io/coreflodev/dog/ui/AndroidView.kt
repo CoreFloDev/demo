@@ -1,4 +1,4 @@
-package io.coreflodev.dog.arch
+package io.coreflodev.dog.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -7,7 +7,7 @@ import io.coreflodev.common.arch.Attach
 import io.coreflodev.common.arch.ScreenInput
 import io.coreflodev.common.arch.ScreenNavigation
 import io.coreflodev.common.arch.ScreenOutput
-import io.coreflodev.dog.theme.DogApiTheme
+import io.coreflodev.common.theme.DogApiTheme
 
 @Composable
 fun <I : ScreenInput, O : ScreenOutput, N : ScreenNavigation> AndroidView(

@@ -1,4 +1,4 @@
-package io.coreflodev.dog.theme
+package io.coreflodev.common.theme
 
 import android.graphics.Color
 import androidx.activity.ComponentActivity

@@ -19,36 +19,39 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import io.coreflodev.dog.R
-import io.coreflodev.dog.arch.AndroidScreen
-import io.coreflodev.dog.arch.AndroidView
-import io.coreflodev.dog.ui.BaseUi
-import io.coreflodev.dog.ui.LoadImage
 import io.coreflodev.dog.details.arch.DetailsInput
 import io.coreflodev.dog.details.arch.DetailsOutput
 import io.coreflodev.dog.details.arch.UiState
 import io.coreflodev.dog.details.di.DetailsStateHolder
 import io.coreflodev.dog.nav.AndroidNavigation
+import io.coreflodev.dog.ui.AndroidView
+import io.coreflodev.dog.ui.BaseUi
+import io.coreflodev.dog.ui.LoadImage
 
 class DetailsActivity : ComponentActivity() {
+
+    private val stateHolder by lazy {
+        ViewModelProvider(
+            this,
+            DetailsStateHolder.Factory(application, intent.getStringExtra(AndroidNavigation.DetailsActivityNav.ID) ?: "")
+        )[DetailsStateHolder::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val screen = ViewModelProvider(
-            this,
-            DetailsStateHolder.Factory(application, intent.getStringExtra(AndroidNavigation.DetailsActivityNav.ID) ?: "")
-        )[DetailsStateHolder::class.java]
-            .screen
-
-        AndroidScreen(screen, this) { attach ->
-            setContent {
-                AndroidView(attach) { state, input ->
-                    BaseUi(id = R.string.detail_title) {
-                        Content(output = state, input = input, it)
-                    }
+        setContent {
+            AndroidView(stateHolder.screen.attach()) { state, input ->
+                BaseUi(id = R.string.detail_title) {
+                    Content(output = state, input = input, it)
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        stateHolder.screen.detach()
+        super.onDestroy()
     }
 }
 

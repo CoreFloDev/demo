@@ -1,4 +1,4 @@
-package io.coreflodev.dog.theme
+package io.coreflodev.common.theme
 
 import androidx.compose.ui.graphics.Color
 

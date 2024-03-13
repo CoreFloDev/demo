@@ -25,8 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import io.coreflodev.dog.R
-import io.coreflodev.dog.arch.AndroidScreen
-import io.coreflodev.dog.arch.AndroidView
+import io.coreflodev.dog.ui.AndroidView
 import io.coreflodev.dog.ui.BaseUi
 import io.coreflodev.dog.ui.LoadImage
 import io.coreflodev.dog.list.arch.ListInput
@@ -36,26 +35,31 @@ import io.coreflodev.dog.list.di.ListStateHolder
 
 class ListActivity : ComponentActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val screen = ViewModelProvider(
+    private val stateHolder by lazy {
+        ViewModelProvider(
             this,
             ListStateHolder.Factory(application)
         )[ListStateHolder::class.java]
-            .screen
+    }
 
-        AndroidScreen(screen, this) { attach ->
-            setContent {
-                AndroidView(attach) { state, input ->
-                    BaseUi(id = R.string.list_title) {
-                        Content(output = state, input = input, it)
-                    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContent {
+            AndroidView(stateHolder.screen.attach()) { state, input ->
+                BaseUi(id = R.string.list_title) {
+                    Content(output = state, input = input, it)
                 }
             }
         }
     }
+
+    override fun onDestroy() {
+        stateHolder.screen.detach()
+        super.onDestroy()
+    }
 }
+
 
 @Composable
 fun Content(output: ListOutput, input: (ListInput) -> Unit, paddingValues: PaddingValues) {
