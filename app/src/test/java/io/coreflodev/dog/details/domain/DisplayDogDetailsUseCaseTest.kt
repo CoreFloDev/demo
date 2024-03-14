@@ -4,6 +4,9 @@ import app.cash.turbine.test
 import io.coreflodev.dog.common.repo.dog.DogRepository
 import io.coreflodev.dog.common.repo.dog.network.Breed
 import io.coreflodev.dog.common.repo.dog.network.Dog
+import io.coreflodev.dog.feature.details.domain.Action
+import io.coreflodev.dog.feature.details.domain.DisplayDogDetailsUseCase
+import io.coreflodev.dog.feature.details.domain.Result
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.emptyFlow

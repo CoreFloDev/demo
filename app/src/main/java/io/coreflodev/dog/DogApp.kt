@@ -2,9 +2,9 @@ package io.coreflodev.dog
 
 import android.app.Application
 import android.content.Context
-import io.coreflodev.common.di.AppComponent
-import io.coreflodev.common.di.create
-import io.coreflodev.dog.nav.AndroidNavigation
+import io.coreflodev.dog.common.di.AppComponent
+import io.coreflodev.dog.common.di.create
+import io.coreflodev.dog.common.nav.AndroidNavigation
 
 class DogApp : Application() {
 
