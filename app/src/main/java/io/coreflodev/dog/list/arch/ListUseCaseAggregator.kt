@@ -1,6 +1,5 @@
 package io.coreflodev.dog.list.arch
 
-import io.coreflodev.common.arch.UseCaseAggregator
 import io.coreflodev.dog.list.domain.Action
 import io.coreflodev.dog.list.domain.DisplayDogListUseCase
 import io.coreflodev.dog.list.domain.OpenDogDetailsUseCase
@@ -15,9 +14,9 @@ import kotlinx.coroutines.flow.shareIn
 class ListUseCaseAggregator(
     private val displayDogListUseCase: DisplayDogListUseCase,
     private val openDogDetailsUseCase: OpenDogDetailsUseCase,
-) : UseCaseAggregator<Action, Result> {
+) {
 
-    override fun execute(scope: CoroutineScope): (Flow<Action>) -> Flow<Result>  = { stream ->
+    fun execute(scope: CoroutineScope): (Flow<Action>) -> Flow<Result> = { stream ->
         val upstream = stream.shareIn(scope, SharingStarted.Eagerly, 1)
 
         listOf(

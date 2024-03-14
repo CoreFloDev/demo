@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flow
 
 class ListNavigationReducer(private val nav: Navigation) {
-    operator fun invoke(): (Flow<Result.Navigation>) -> Flow<ListNavigation> = { stream ->
+    operator fun invoke(): (Flow<Result.Navigation>) -> Flow<ListOutput> = { stream ->
         stream.flatMapConcat { navigation ->
             flow {
                 when (navigation) {

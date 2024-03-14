@@ -1,7 +1,5 @@
 package io.coreflodev.dog.details.domain
 
-import io.coreflodev.common.arch.DomainAction
-
-sealed class Action : DomainAction {
+sealed class Action {
     data object InitialAction : Action()
 }

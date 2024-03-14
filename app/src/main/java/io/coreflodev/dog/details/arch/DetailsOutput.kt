@@ -1,11 +1,8 @@
 package io.coreflodev.dog.details.arch
 
-import io.coreflodev.common.arch.ScreenNavigation
 import io.coreflodev.common.arch.ScreenOutput
 
 data class DetailsOutput(val uiState: UiState = UiState.Loading) : ScreenOutput
-
-sealed class DetailsNavigation : ScreenNavigation
 
 sealed class UiState {
     data object Loading : UiState()

@@ -1,11 +1,8 @@
 package io.coreflodev.dog.details.domain
-
-import io.coreflodev.common.arch.DomainResult
-
-sealed class Result : DomainResult {
-    sealed class UiUpdate : Result(), DomainResult.UiUpdate {
-        object Loading : UiUpdate()
-        object Retry : UiUpdate()
+sealed class Result {
+    sealed class UiUpdate : Result() {
+        data object Loading : UiUpdate()
+        data object Retry : UiUpdate()
         data class Display(
             val name: String,
             val image: String,
@@ -14,4 +11,6 @@ sealed class Result : DomainResult {
             val temperament: String
         ) : UiUpdate()
     }
+
+    sealed class Navigation : Result()
 }
